@@ -234,3 +234,72 @@
 17:09:10.506 [main] INFO  c.e.MtsTestExam.service.ClientTest - Starting ClientTest using Java 18.0.1.1 with PID 9812 (started by sasha in D:\MtsTestExam)
 17:09:10.507 [main] INFO  c.e.MtsTestExam.service.ClientTest - No active profile set, falling back to 1 default profile: "default"
 17:09:14.376 [main] INFO  c.e.MtsTestExam.service.ClientTest - Started ClientTest in 4.082 seconds (process running for 5.272)
+19:57:49.583 [main] INFO  c.e.M.c.ClientControllerTest - Starting ClientControllerTest using Java 18.0.1.1 with PID 17440 (started by sasha in D:\MtsTestExam)
+19:57:49.586 [main] INFO  c.e.M.c.ClientControllerTest - No active profile set, falling back to 1 default profile: "default"
+19:57:57.905 [main] INFO  c.e.M.c.ClientControllerTest - Started ClientControllerTest in 8.837 seconds (process running for 11.531)
+19:57:59.361 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@7a0eb939
+19:57:59.521 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@4e58eda2
+19:57:59.547 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@5257123d
+19:57:59.587 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@6e2e11ee
+19:57:59.597 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@189f9f9f
+19:57:59.620 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@c2ddfeb
+19:57:59.639 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@7695184b
+19:57:59.647 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@29390110
+19:57:59.661 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@615bd28b
+19:57:59.690 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@7ae75ba6
+19:57:59.701 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@64864875
+19:59:06.762 [main] INFO  c.e.M.c.ClientControllerTest - Starting ClientControllerTest using Java 18.0.1.1 with PID 10880 (started by sasha in D:\MtsTestExam)
+19:59:06.764 [main] INFO  c.e.M.c.ClientControllerTest - No active profile set, falling back to 1 default profile: "default"
+19:59:14.063 [main] INFO  c.e.M.c.ClientControllerTest - Started ClientControllerTest in 7.727 seconds (process running for 9.94)
+19:59:15.327 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@602e7a9e
+19:59:15.422 [main] INFO  c.e.M.controller.ClientController - Ok
+19:59:15.465 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@381c826c
+19:59:15.478 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@36dbfa68
+19:59:15.504 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@3c3357c7
+19:59:15.512 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@506d7fed
+19:59:15.534 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@381d7c4c
+19:59:15.549 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@259f0fdb
+19:59:15.554 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@655d5285
+19:59:15.564 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@49d5c751
+19:59:15.590 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@689fe2a3
+19:59:15.598 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@2ab1c7a9
+20:01:16.231 [main] INFO  c.e.M.service.BankAccountTest - Starting BankAccountTest using Java 18.0.1.1 with PID 7388 (started by sasha in D:\MtsTestExam)
+20:01:16.234 [main] INFO  c.e.M.service.BankAccountTest - No active profile set, falling back to 1 default profile: "default"
+20:01:23.442 [main] INFO  c.e.M.service.BankAccountTest - Started BankAccountTest in 7.609 seconds (process running for 9.767)
+20:01:24.526 [main] INFO  c.e.M.controller.ClientController - Client not found
+20:01:41.362 [main] INFO  c.e.MtsTestExam.service.ClientTest - Starting ClientTest using Java 18.0.1.1 with PID 13204 (started by sasha in D:\MtsTestExam)
+20:01:41.364 [main] INFO  c.e.MtsTestExam.service.ClientTest - No active profile set, falling back to 1 default profile: "default"
+20:01:48.449 [main] INFO  c.e.MtsTestExam.service.ClientTest - Started ClientTest in 7.531 seconds (process running for 9.68)
+20:04:56.938 [main] INFO  c.e.MtsTestExam.service.ClientTest - Starting ClientTest using Java 18.0.1.1 with PID 13892 (started by sasha in D:\MtsTestExam)
+20:04:56.939 [main] INFO  c.e.MtsTestExam.service.ClientTest - No active profile set, falling back to 1 default profile: "default"
+20:05:04.288 [main] INFO  c.e.MtsTestExam.service.ClientTest - Started ClientTest in 7.784 seconds (process running for 10.041)
+20:05:18.121 [main] INFO  c.e.M.service.BankAccountTest - Starting BankAccountTest using Java 18.0.1.1 with PID 14316 (started by sasha in D:\MtsTestExam)
+20:05:18.123 [main] INFO  c.e.M.service.BankAccountTest - No active profile set, falling back to 1 default profile: "default"
+20:05:25.815 [main] INFO  c.e.M.service.BankAccountTest - Started BankAccountTest in 8.145 seconds (process running for 10.565)
+20:05:26.868 [main] INFO  c.e.M.controller.ClientController - Client not found
+20:13:57.375 [main] INFO  c.e.M.c.ClientControllerTest - Starting ClientControllerTest using Java 18.0.1.1 with PID 7284 (started by sasha in D:\MtsTestExam)
+20:13:57.378 [main] INFO  c.e.M.c.ClientControllerTest - No active profile set, falling back to 1 default profile: "default"
+20:14:04.604 [main] INFO  c.e.M.c.ClientControllerTest - Started ClientControllerTest in 7.632 seconds (process running for 9.981)
+20:14:06.016 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@31b6eec8
+20:14:27.636 [main] INFO  c.e.M.c.ClientControllerTest - Starting ClientControllerTest using Java 18.0.1.1 with PID 9192 (started by sasha in D:\MtsTestExam)
+20:14:27.638 [main] INFO  c.e.M.c.ClientControllerTest - No active profile set, falling back to 1 default profile: "default"
+20:14:34.802 [main] INFO  c.e.M.c.ClientControllerTest - Started ClientControllerTest in 7.592 seconds (process running for 9.869)
+20:14:36.194 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@5ae6119b
+20:14:36.284 [main] INFO  c.e.M.controller.ClientController - Ok
+20:14:36.323 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@3b22bcad
+20:14:36.336 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@2257590f
+20:14:36.366 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@480fb706
+20:14:36.376 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@66d766b9
+20:14:36.394 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@251db193
+20:14:36.410 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@4d20cbb5
+20:14:36.417 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@74eae1e0
+20:14:36.425 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@655d5285
+20:14:36.450 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@2e41b65a
+20:14:36.456 [main] INFO  c.e.M.controller.ClientController - com.example.MtsTestExam.entity.response.generic.ResponseData@b6fea12
+20:14:53.534 [main] INFO  c.e.M.service.BankAccountTest - Starting BankAccountTest using Java 18.0.1.1 with PID 20828 (started by sasha in D:\MtsTestExam)
+20:14:53.536 [main] INFO  c.e.M.service.BankAccountTest - No active profile set, falling back to 1 default profile: "default"
+20:15:00.625 [main] INFO  c.e.M.service.BankAccountTest - Started BankAccountTest in 7.49 seconds (process running for 9.547)
+20:15:01.618 [main] INFO  c.e.M.controller.ClientController - Client not found
+20:15:11.567 [main] INFO  c.e.MtsTestExam.service.ClientTest - Starting ClientTest using Java 18.0.1.1 with PID 11892 (started by sasha in D:\MtsTestExam)
+20:15:11.568 [main] INFO  c.e.MtsTestExam.service.ClientTest - No active profile set, falling back to 1 default profile: "default"
+20:15:18.667 [main] INFO  c.e.MtsTestExam.service.ClientTest - Started ClientTest in 7.49 seconds (process running for 9.581)
