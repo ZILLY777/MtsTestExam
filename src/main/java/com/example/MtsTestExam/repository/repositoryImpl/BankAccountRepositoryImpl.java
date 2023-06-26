@@ -49,13 +49,13 @@ public class BankAccountRepositoryImpl implements BankAccountRepository {
     }
 
     @Override
-    public void deleteBankAccountByClientIdAndBankAccountId(UUID clientId, UUID bankAccountId) {
-        jdbcTemplate.update(DELETE_BANK_ACCOUNT_BY_CLIENT_ID_AND_BANK_ACCOUNT_ID_QUERY, clientId, bankAccountId);
+    public void deleteBankAccountByClientIdAndBankAccountId(UUID clientId, UUID bankAccountNumber) {
+        jdbcTemplate.update(DELETE_BANK_ACCOUNT_BY_CLIENT_ID_AND_BANK_ACCOUNT_ID_QUERY, clientId, bankAccountNumber);
     }
 
     @Override
-    public Optional<BankAccount> findBankAccountByAccountNumber(UUID accountNumber) {
-        return jdbcTemplate.query(FIND_BANK_ACCOUNT_BY_ACCOUNT_NUMBER, bankAccountRowMapper, accountNumber).stream().findFirst();
+    public Optional<BankAccount> findBankAccountByAccountNumber(UUID bankAccountNumber) {
+        return jdbcTemplate.query(FIND_BANK_ACCOUNT_BY_ACCOUNT_NUMBER, bankAccountRowMapper, bankAccountNumber).stream().findFirst();
     }
 
 }

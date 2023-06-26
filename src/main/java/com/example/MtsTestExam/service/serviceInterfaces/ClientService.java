@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ClientService {
-    UUID save(ClientDto clientDto);
+    UUID postClient(ClientDto clientDto);
     List<ClientDto> getAllClients();
     void deleteClient(UUID id);
 }

@@ -2,8 +2,8 @@ package com.example.MtsTestExam.service;
 
 import com.example.MtsTestExam.entity.dto.BankAccountDto;
 import com.example.MtsTestExam.entity.dto.ClientDto;
-import com.example.MtsTestExam.exception.BankAccountNotFound;
-import com.example.MtsTestExam.exception.ClientNotFound;
+import com.example.MtsTestExam.exception.BankAccountNotFoundException;
+import com.example.MtsTestExam.exception.ClientNotFoundException;
 import com.example.MtsTestExam.exception.InvalidCurrencyException;
 import com.example.MtsTestExam.service.serviceInterfaces.BankAccountService;
 import com.example.MtsTestExam.service.serviceInterfaces.ClientService;
@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +34,7 @@ public class BankAccountTest {
     void testPostEmptyBankAccount(){
         BankAccountDto bankAccountDto = new BankAccountDto();
         Exception exception = assertThrows(InvalidCurrencyException.class, () -> {
-            bankAccountService.save(bankAccountDto);
+            bankAccountService.postBankAccount(bankAccountDto);
         });
         String expectedMessage = "INVALID_CURRENCY";
         String actualMessage = exception.getMessage();
@@ -49,7 +48,7 @@ public class BankAccountTest {
         bankAccountDto.setAccountCurrency("RUB");
         bankAccountDto.setClientId(uuid);
         Exception exception = assertThrows(InvalidCurrencyException.class, () -> {
-            bankAccountService.save(bankAccountDto);
+            bankAccountService.postBankAccount(bankAccountDto);
         });
         String expectedMessage = "INVALID_CURRENCY";
         String actualMessage = exception.getMessage();
@@ -62,8 +61,8 @@ public class BankAccountTest {
         BankAccountDto bankAccountDto = new BankAccountDto();
         bankAccountDto.setAccountCurrency("rub");
         bankAccountDto.setClientId(uuid);
-        Exception exception = assertThrows(ClientNotFound.class, () -> {
-            bankAccountService.save(bankAccountDto);
+        Exception exception = assertThrows(ClientNotFoundException.class, () -> {
+            bankAccountService.postBankAccount(bankAccountDto);
         });
         String expectedMessage = "CLIENT_NOT_FOUND";
         String actualMessage = exception.getMessage();
@@ -79,11 +78,11 @@ public class BankAccountTest {
         clientDto.setDocument("passport");
         clientDto.setDocumentData("52347");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
-        UUID uuid = clientService.save(clientDto);
+        UUID uuid = clientService.postClient(clientDto);
         BankAccountDto bankAccountDto = new BankAccountDto();
         bankAccountDto.setAccountCurrency("rub");
         bankAccountDto.setClientId(uuid);
-        assertEquals(bankAccountService.save(bankAccountDto).getClass(), UUID.class);
+        assertEquals(bankAccountService.postBankAccount(bankAccountDto).getClass(), UUID.class);
     }
 
     @Test
@@ -92,7 +91,7 @@ public class BankAccountTest {
         BankAccountDto bankAccountDto = new BankAccountDto();
         bankAccountDto.setAccountCurrency("rub");
         bankAccountDto.setClientId(uuid);
-        Exception exception = assertThrows(ClientNotFound.class, () -> {
+        Exception exception = assertThrows(ClientNotFoundException.class, () -> {
             bankAccountService.getClientListOfBankAccounts(uuid);
         });
         String expectedMessage = "CLIENT_NOT_FOUND";
@@ -109,7 +108,7 @@ public class BankAccountTest {
         clientDto.setDocument("passport");
         clientDto.setDocumentData("52347");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
-        UUID uuid = clientService.save(clientDto);
+        UUID uuid = clientService.postClient(clientDto);
         BankAccountDto bankAccountDto = new BankAccountDto();
         BankAccountDto bankAccountDtoTwo = new BankAccountDto();
         bankAccountDto.setAccountCurrency("rub");
@@ -126,7 +125,7 @@ public class BankAccountTest {
         BankAccountDto bankAccountDto = new BankAccountDto();
         bankAccountDto.setAccountCurrency("rub");
         bankAccountDto.setClientId(uuid);
-        Exception exception = assertThrows(ClientNotFound.class, () -> {
+        Exception exception = assertThrows(ClientNotFoundException.class, () -> {
             bankAccountService.deleteBankAccount(uuid, uuidTwo);
         });
         String expectedMessage = "CLIENT_NOT_FOUND";
@@ -143,12 +142,12 @@ public class BankAccountTest {
         clientDto.setDocument("passport");
         clientDto.setDocumentData("52347");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
-        UUID uuid = clientService.save(clientDto);
+        UUID uuid = clientService.postClient(clientDto);
         UUID uuidTwo = UUID.randomUUID();
         BankAccountDto bankAccountDto = new BankAccountDto();
         bankAccountDto.setAccountCurrency("rub");
         bankAccountDto.setClientId(uuid);
-        Exception exception = assertThrows(BankAccountNotFound.class, () -> {
+        Exception exception = assertThrows(BankAccountNotFoundException.class, () -> {
             bankAccountService.deleteBankAccount(uuid, uuidTwo);
         });
         String expectedMessage = "BANK_ACCOUNT_NOT_FOUND";
@@ -165,13 +164,13 @@ public class BankAccountTest {
         clientDto.setDocument("passport");
         clientDto.setDocumentData("52347");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
-        UUID uuid = clientService.save(clientDto);
+        UUID uuid = clientService.postClient(clientDto);
         BankAccountDto bankAccountDto = new BankAccountDto();
         bankAccountDto.setAccountCurrency("rub");
         bankAccountDto.setClientId(uuid);
-        UUID uuidTwo =bankAccountService.save(bankAccountDto);
+        UUID uuidTwo =bankAccountService.postBankAccount(bankAccountDto);
         bankAccountService.deleteBankAccount(uuid, uuidTwo);
-        Exception exception = assertThrows(BankAccountNotFound.class, () -> {
+        Exception exception = assertThrows(BankAccountNotFoundException.class, () -> {
             bankAccountService.deleteBankAccount(uuid, uuidTwo);
         });
         String expectedMessage = "BANK_ACCOUNT_NOT_FOUND";

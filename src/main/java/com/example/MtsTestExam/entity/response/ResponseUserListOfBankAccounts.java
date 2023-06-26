@@ -10,6 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ResponseUserBankAccountsList {
+public class ResponseUserListOfBankAccounts {
     private List<BankAccountDto> userBankAccounts;
 }

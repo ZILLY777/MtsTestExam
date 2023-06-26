@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface BankAccountService {
-    UUID save(BankAccountDto bankAccountDto);
+    UUID postBankAccount(BankAccountDto bankAccountDto);
     List<BankAccountDto> getClientListOfBankAccounts(UUID clientId);
     void deleteBankAccount(UUID clientId, UUID bankAccountId);
 }

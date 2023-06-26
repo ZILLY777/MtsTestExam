@@ -58,8 +58,8 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public void deleteClient(UUID id) {
-        jdbcTemplate.update(DELETE_CLIENT_BY_CLIENT_ID, id);
+    public void deleteClient(UUID clientId) {
+        jdbcTemplate.update(DELETE_CLIENT_BY_CLIENT_ID, clientId);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public Optional<Client> findClientById(UUID id) {
-        return jdbcTemplate.query(FIND_CLIENT_BY_ID, clientRowMapper, id).stream().findFirst();
+    public Optional<Client> findClientById(UUID clientId) {
+        return jdbcTemplate.query(FIND_CLIENT_BY_ID, clientRowMapper, clientId).stream().findFirst();
     }
 }

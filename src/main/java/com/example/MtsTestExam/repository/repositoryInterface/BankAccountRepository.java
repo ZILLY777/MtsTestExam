@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface BankAccountRepository {
     BankAccount save(BankAccount bankAccount);
     List<BankAccount> findBankAccountsByClientId(UUID clientId);
-    void deleteBankAccountByClientIdAndBankAccountId(UUID clientId, UUID bankAccountId);
+    void deleteBankAccountByClientIdAndBankAccountId(UUID clientId, UUID bankAccountNumber);
 
-    Optional<BankAccount> findBankAccountByAccountNumber(UUID accountNumber);
+    Optional<BankAccount> findBankAccountByAccountNumber(UUID bankAccountNumber);
 }

@@ -37,7 +37,7 @@ public class ClientExceptionHandler {
                 apiError, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({ClientNotFound.class})
+    @ExceptionHandler({ClientNotFoundException.class})
     public ResponseEntity<Object> handleAlreadyNotFoundClient(Exception ex){
         ResponseBasicError<ResponseSubError> apiError = ResponseBasicError.wrap(
                 new ResponseSubError(ex.getLocalizedMessage(), "Клиент не найден"));

@@ -2,8 +2,7 @@ package com.example.MtsTestExam.exception.handler;
 
 import com.example.MtsTestExam.entity.response.ResponseSubError;
 import com.example.MtsTestExam.entity.response.generic.ResponseBasicError;
-import com.example.MtsTestExam.exception.BankAccountNotFound;
-import com.example.MtsTestExam.exception.EmptyFIOException;
+import com.example.MtsTestExam.exception.BankAccountNotFoundException;
 import com.example.MtsTestExam.exception.InvalidCurrencyException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,7 @@ public class BankAccountExceptionHandler {
                 apiError, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({BankAccountNotFound.class})
+    @ExceptionHandler({BankAccountNotFoundException.class})
     public ResponseEntity<Object> handleBankAccountNotFound(Exception ex){
         ResponseBasicError<ResponseSubError> apiError = ResponseBasicError.wrap(
                 new ResponseSubError(ex.getLocalizedMessage(), "Счет не найден"));

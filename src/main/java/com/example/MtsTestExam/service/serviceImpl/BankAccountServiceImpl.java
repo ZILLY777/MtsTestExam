@@ -2,8 +2,8 @@ package com.example.MtsTestExam.service.serviceImpl;
 
 import com.example.MtsTestExam.controller.ClientController;
 import com.example.MtsTestExam.entity.dto.BankAccountDto;
-import com.example.MtsTestExam.exception.BankAccountNotFound;
-import com.example.MtsTestExam.exception.ClientNotFound;
+import com.example.MtsTestExam.exception.BankAccountNotFoundException;
+import com.example.MtsTestExam.exception.ClientNotFoundException;
 import com.example.MtsTestExam.exception.InvalidCurrencyException;
 import com.example.MtsTestExam.mapper.BankAccountMapper;
 import com.example.MtsTestExam.repository.repositoryInterface.BankAccountRepository;
@@ -33,36 +33,35 @@ public class BankAccountServiceImpl implements BankAccountService {
 
 
     @Override
-    public UUID save(BankAccountDto bankAccountDto) {
+    public UUID postBankAccount(BankAccountDto bankAccountDto) {
         if(!currencyList.contains(bankAccountDto.getAccountCurrency())){
             throw new InvalidCurrencyException();
         }
         if(clientRepository.findClientById(bankAccountDto.getClientId()).isEmpty()){
-            throw new ClientNotFound();
+            throw new ClientNotFoundException();
         }
-
         return bankAccountRepository.save(bankAccountMapper.bankAccountDtoToBankAccount(bankAccountDto)).getAccountNumber();
     }
 
     @Override
     public List<BankAccountDto> getClientListOfBankAccounts(UUID clientId) {
         if(clientRepository.findClientById(clientId).isEmpty()){
-            logger.info("Client nopt found");//уточнить
-            throw new ClientNotFound();
+            logger.info("Client not found");//уточнить
+            throw new ClientNotFoundException();
         }
         return bankAccountMapper.bankAccountListToBankAccountListDto(bankAccountRepository.findBankAccountsByClientId(clientId));
     }
 
     @Override
-    public void deleteBankAccount(UUID clientId, UUID bankAccountId) {
+    public void deleteBankAccount(UUID clientId, UUID bankAccountNumber) {
         if(clientRepository.findClientById(clientId).isEmpty()){
 
-            throw new ClientNotFound();
+            throw new ClientNotFoundException();
         }
-        if(bankAccountRepository.findBankAccountByAccountNumber(bankAccountId).isEmpty()){
-            throw new BankAccountNotFound();
+        if(bankAccountRepository.findBankAccountByAccountNumber(bankAccountNumber).isEmpty()){
+            throw new BankAccountNotFoundException();
         }
-        bankAccountRepository.deleteBankAccountByClientIdAndBankAccountId(clientId, bankAccountId);
+        bankAccountRepository.deleteBankAccountByClientIdAndBankAccountId(clientId, bankAccountNumber);
 
     }
 }

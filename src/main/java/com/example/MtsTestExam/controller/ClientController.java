@@ -5,16 +5,14 @@ import com.example.MtsTestExam.entity.dto.ClientDto;
 import com.example.MtsTestExam.entity.response.ResponseBankAccountNumber;
 import com.example.MtsTestExam.entity.response.ResponseClientId;
 import com.example.MtsTestExam.entity.response.ResponseClients;
-import com.example.MtsTestExam.entity.response.ResponseUserBankAccountsList;
+import com.example.MtsTestExam.entity.response.ResponseUserListOfBankAccounts;
 import com.example.MtsTestExam.entity.response.generic.ResponseData;
 import com.example.MtsTestExam.service.serviceInterfaces.BankAccountService;
 import com.example.MtsTestExam.service.serviceInterfaces.ClientService;
 import lombok.RequiredArgsConstructor;
 import jakarta.validation.Valid;
-import org.aspectj.weaver.ResolvedPointcutDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +31,7 @@ public class ClientController {
 
     @PostMapping
     public ResponseEntity<ResponseData<ResponseClientId>> postClient(@RequestBody @Valid ClientDto clientDto){
-        ResponseData<ResponseClientId> data = ResponseData.wrap(new ResponseClientId(clientService.save(clientDto)));
+        ResponseData<ResponseClientId> data = ResponseData.wrap(new ResponseClientId(clientService.postClient(clientDto)));
         logger.info(data.toString());
         return ResponseEntity.ok(data);
     }
@@ -46,23 +44,23 @@ public class ClientController {
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteClient(@RequestParam UUID id){
-        clientService.deleteClient(id);
+    public ResponseEntity<?> deleteClient(@RequestParam UUID clientId){
+        clientService.deleteClient(clientId);
         logger.info("Ok");
         return ResponseEntity.ok("");
     }
 
     @PostMapping("/bank-account")
     public ResponseEntity<ResponseData<ResponseBankAccountNumber>> postBankAccount(@RequestBody BankAccountDto bankAccountDto){
-        ResponseData<ResponseBankAccountNumber> data = ResponseData.wrap(new ResponseBankAccountNumber(bankAccountService.save(bankAccountDto)));
+        ResponseData<ResponseBankAccountNumber> data = ResponseData.wrap(new ResponseBankAccountNumber(bankAccountService.postBankAccount(bankAccountDto)));
         logger.info(data.toString());
         return ResponseEntity.ok(data);
     }
 
     @GetMapping("/bank-account/all-user")
-    public ResponseEntity<ResponseData<ResponseUserBankAccountsList>> getClientListOfBankAccount(@RequestParam UUID clientId){
-        ResponseData<ResponseUserBankAccountsList> data = ResponseData
-                .wrap(new ResponseUserBankAccountsList(bankAccountService.getClientListOfBankAccounts(clientId)));
+    public ResponseEntity<ResponseData<ResponseUserListOfBankAccounts>> getClientListOfBankAccount(@RequestParam UUID clientId){
+        ResponseData<ResponseUserListOfBankAccounts> data = ResponseData
+                .wrap(new ResponseUserListOfBankAccounts(bankAccountService.getClientListOfBankAccounts(clientId)));
         logger.info(data.toString());
         return ResponseEntity.ok(data);
     }

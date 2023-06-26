@@ -1,6 +1,5 @@
 package com.example.MtsTestExam.service;
 
-import com.example.MtsTestExam.entity.dto.BankAccountDto;
 import com.example.MtsTestExam.entity.dto.ClientDto;
 import com.example.MtsTestExam.exception.*;
 import com.example.MtsTestExam.service.serviceInterfaces.ClientService;
@@ -8,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -36,7 +34,7 @@ public class ClientTest {
         clientDto.setDocumentData("52347");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
         Exception exception = assertThrows(EmptyFIOException.class, () -> {
-            clientService.save(clientDto);
+            clientService.postClient(clientDto);
         });
         String expectedMessage = "EMPTY_FIO";
         String actualMessage = exception.getMessage();
@@ -53,7 +51,7 @@ public class ClientTest {
         clientDto.setDocumentData("52347");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
         Exception exception = assertThrows(EmptyFIOException.class, () -> {
-            clientService.save(clientDto);
+            clientService.postClient(clientDto);
         });
         String expectedMessage = "EMPTY_FIO";
         String actualMessage = exception.getMessage();
@@ -70,7 +68,7 @@ public class ClientTest {
         clientDto.setDocumentData("52347");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
         Exception exception = assertThrows(InvalidDocTypeException.class, () -> {
-            clientService.save(clientDto);
+            clientService.postClient(clientDto);
         });
         String expectedMessage = "INVALID_TYPE_OF_DOCUMENTS";
         String actualMessage = exception.getMessage();
@@ -87,7 +85,7 @@ public class ClientTest {
         clientDto.setDocumentData("");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
         Exception exception = assertThrows(InvalidDocDataException.class, () -> {
-            clientService.save(clientDto);
+            clientService.postClient(clientDto);
         });
         String expectedMessage = "INVALID_DATA_IN_DOCUMENTS";
         String actualMessage = exception.getMessage();
@@ -103,7 +101,7 @@ public class ClientTest {
         clientDto.setDocument("passport");
         clientDto.setDocumentData("9238774");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
-        assertEquals(clientService.save(clientDto).getClass(), UUID.class);
+        assertEquals(clientService.postClient(clientDto).getClass(), UUID.class);
     }
 
     @Test
@@ -126,7 +124,7 @@ public class ClientTest {
     @Test
     void testDeleteInvalidClient(){
         UUID uuid = UUID.randomUUID();
-        Exception exception = assertThrows(ClientNotFound.class, () -> {
+        Exception exception = assertThrows(ClientNotFoundException.class, () -> {
             clientService.deleteClient(uuid);
         });
         String expectedMessage = "CLIENT_NOT_FOUND";
@@ -144,9 +142,9 @@ public class ClientTest {
         clientDto.setDocument("passport");
         clientDto.setDocumentData("52347");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
-        UUID id =clientService.save(clientDto);
+        UUID id =clientService.postClient(clientDto);
         clientService.deleteClient(id);
-        Exception exception = assertThrows(ClientNotFound.class, () -> {
+        Exception exception = assertThrows(ClientNotFoundException.class, () -> {
             clientService.deleteClient(uuid);
         });
         String expectedMessage = "CLIENT_NOT_FOUND";

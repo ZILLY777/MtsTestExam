@@ -81,7 +81,7 @@ public class ClientControllerTest {
     @Test
     public void deleteClient() throws Exception {
         postClient();
-        this.mockMvc.perform(delete("/client").param("id", uuid)
+        this.mockMvc.perform(delete("/client").param("clientId", uuid)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/plain;charset=UTF-8"))
