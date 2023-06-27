@@ -30,6 +30,24 @@ public class BankAccountTest {
     @Autowired
     private ClientService clientService;
 
+    private ClientDto clientDto;
+
+    private BankAccountDto bankAccountDto;
+
+    void createClientDTO(){
+        clientDto = new ClientDto();
+        clientDto.setSurname("Alekseev");
+        clientDto.setName("Alex");
+        clientDto.setPatronymic("Alekseevich");
+        clientDto.setDocument("passport");
+        clientDto.setDocumentData("52347");
+        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
+    }
+
+    void createBankAccountDto(){
+        bankAccountDto = new BankAccountDto();
+        bankAccountDto.setAccountCurrency("rub");
+    }
     @Test
     void testPostEmptyBankAccount(){
         BankAccountDto bankAccountDto = new BankAccountDto();
@@ -44,7 +62,7 @@ public class BankAccountTest {
     @Test
     void testPostInvalidCurrency(){
         UUID uuid = UUID.randomUUID();
-        BankAccountDto bankAccountDto = new BankAccountDto();
+        createBankAccountDto();
         bankAccountDto.setAccountCurrency("RUB");
         bankAccountDto.setClientId(uuid);
         Exception exception = assertThrows(InvalidCurrencyException.class, () -> {
@@ -58,8 +76,7 @@ public class BankAccountTest {
     @Test
     void testPostInvalidUserId(){
         UUID uuid = UUID.randomUUID();
-        BankAccountDto bankAccountDto = new BankAccountDto();
-        bankAccountDto.setAccountCurrency("rub");
+        createBankAccountDto();
         bankAccountDto.setClientId(uuid);
         Exception exception = assertThrows(ClientNotFoundException.class, () -> {
             bankAccountService.postBankAccount(bankAccountDto);
@@ -71,16 +88,9 @@ public class BankAccountTest {
 
     @Test
     void testNormalPost(){
-        ClientDto clientDto = new ClientDto();
-        clientDto.setSurname("Alekseev");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
-        clientDto.setDocument("passport");
-        clientDto.setDocumentData("52347");
-        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
+        createClientDTO();
         UUID uuid = clientService.postClient(clientDto);
-        BankAccountDto bankAccountDto = new BankAccountDto();
-        bankAccountDto.setAccountCurrency("rub");
+        createBankAccountDto();
         bankAccountDto.setClientId(uuid);
         assertEquals(bankAccountService.postBankAccount(bankAccountDto).getClass(), UUID.class);
     }
@@ -88,8 +98,7 @@ public class BankAccountTest {
     @Test
     void testGetInvalidUserIdListOfAcc(){
         UUID uuid = UUID.randomUUID();
-        BankAccountDto bankAccountDto = new BankAccountDto();
-        bankAccountDto.setAccountCurrency("rub");
+        createBankAccountDto();
         bankAccountDto.setClientId(uuid);
         Exception exception = assertThrows(ClientNotFoundException.class, () -> {
             bankAccountService.getClientListOfBankAccounts(uuid);
@@ -101,20 +110,10 @@ public class BankAccountTest {
 
     @Test
     void testGetListOfAcc(){
-        ClientDto clientDto = new ClientDto();
-        clientDto.setSurname("Alekseev");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
-        clientDto.setDocument("passport");
-        clientDto.setDocumentData("52347");
-        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
+        createClientDTO();
         UUID uuid = clientService.postClient(clientDto);
-        BankAccountDto bankAccountDto = new BankAccountDto();
-        BankAccountDto bankAccountDtoTwo = new BankAccountDto();
-        bankAccountDto.setAccountCurrency("rub");
+        createBankAccountDto();
         bankAccountDto.setClientId(uuid);
-        bankAccountDtoTwo.setAccountCurrency("usd");
-        bankAccountDtoTwo.setClientId(uuid);
         assertEquals(bankAccountService.getClientListOfBankAccounts(uuid).getClass(), ArrayList.class);
     }
 
@@ -122,8 +121,7 @@ public class BankAccountTest {
     void testDeleteInvalidUserId(){
         UUID uuid = UUID.randomUUID();
         UUID uuidTwo = UUID.randomUUID();
-        BankAccountDto bankAccountDto = new BankAccountDto();
-        bankAccountDto.setAccountCurrency("rub");
+        createBankAccountDto();
         bankAccountDto.setClientId(uuid);
         Exception exception = assertThrows(ClientNotFoundException.class, () -> {
             bankAccountService.deleteBankAccount(uuid, uuidTwo);
@@ -135,17 +133,10 @@ public class BankAccountTest {
 
     @Test
     void testDeleteInvalidBankAccountId(){
-        ClientDto clientDto = new ClientDto();
-        clientDto.setSurname("Alekseev");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
-        clientDto.setDocument("passport");
-        clientDto.setDocumentData("52347");
-        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
+        createClientDTO();
         UUID uuid = clientService.postClient(clientDto);
         UUID uuidTwo = UUID.randomUUID();
-        BankAccountDto bankAccountDto = new BankAccountDto();
-        bankAccountDto.setAccountCurrency("rub");
+        createBankAccountDto();
         bankAccountDto.setClientId(uuid);
         Exception exception = assertThrows(BankAccountNotFoundException.class, () -> {
             bankAccountService.deleteBankAccount(uuid, uuidTwo);
@@ -157,16 +148,9 @@ public class BankAccountTest {
 
     @Test
     void testDeleteValidBankAccountId(){
-        ClientDto clientDto = new ClientDto();
-        clientDto.setSurname("Alekseev");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
-        clientDto.setDocument("passport");
-        clientDto.setDocumentData("52347");
-        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
+        createClientDTO();
         UUID uuid = clientService.postClient(clientDto);
-        BankAccountDto bankAccountDto = new BankAccountDto();
-        bankAccountDto.setAccountCurrency("rub");
+        createBankAccountDto();
         bankAccountDto.setClientId(uuid);
         UUID uuidTwo =bankAccountService.postBankAccount(bankAccountDto);
         bankAccountService.deleteBankAccount(uuid, uuidTwo);

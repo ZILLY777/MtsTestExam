@@ -24,15 +24,31 @@ public class ClientTest {
     @Autowired
     private ClientService clientService;
 
-    @Test
-    void testPostClientWithInvalidName(){
-        ClientDto clientDto = new ClientDto();
+    private ClientDto clientDto;
+
+    void createClientDTO(){
+        clientDto = new ClientDto();
         clientDto.setSurname("Alekseev");
-        clientDto.setName("");
+        clientDto.setName("Alex");
         clientDto.setPatronymic("Alekseevich");
         clientDto.setDocument("passport");
         clientDto.setDocumentData("52347");
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
+    }
+    void createClientDTOSecond(){
+        clientDto = new ClientDto();
+        clientDto.setSurname("Alekseev");
+        clientDto.setName("Alex");
+        clientDto.setPatronymic("Alekseevich");
+        clientDto.setDocument("passport");
+        clientDto.setDocumentData("7234789234");
+        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
+    }
+
+    @Test
+    void testPostClientWithInvalidName(){
+        createClientDTO();
+        clientDto.setName("");
         Exception exception = assertThrows(EmptyFIOException.class, () -> {
             clientService.postClient(clientDto);
         });
@@ -43,13 +59,8 @@ public class ClientTest {
 
     @Test
     void testPostClientWithInvalidSurName(){
-        ClientDto clientDto = new ClientDto();
+        createClientDTO();
         clientDto.setSurname("");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
-        clientDto.setDocument("passport");
-        clientDto.setDocumentData("52347");
-        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
         Exception exception = assertThrows(EmptyFIOException.class, () -> {
             clientService.postClient(clientDto);
         });
@@ -60,13 +71,8 @@ public class ClientTest {
 
     @Test
     void testPostClientWithInvalidDocType(){
-        ClientDto clientDto = new ClientDto();
-        clientDto.setSurname("Alekseev");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
+        createClientDTO();
         clientDto.setDocument("");
-        clientDto.setDocumentData("52347");
-        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
         Exception exception = assertThrows(InvalidDocTypeException.class, () -> {
             clientService.postClient(clientDto);
         });
@@ -77,13 +83,8 @@ public class ClientTest {
 
     @Test
     void testPostClientWithInvalidDocData(){
-        ClientDto clientDto = new ClientDto();
-        clientDto.setSurname("Alekseev");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
-        clientDto.setDocument("passport");
+        createClientDTO();
         clientDto.setDocumentData("");
-        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
         Exception exception = assertThrows(InvalidDocDataException.class, () -> {
             clientService.postClient(clientDto);
         });
@@ -94,25 +95,15 @@ public class ClientTest {
 
     @Test
     void testPostValidClient(){
-        ClientDto clientDto = new ClientDto();
-        clientDto.setSurname("Alekseev");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
-        clientDto.setDocument("passport");
-        clientDto.setDocumentData("9238774");
+        createClientDTO();
         clientDto.setBirthday(LocalDate.of(2023, 5, 3));
         assertEquals(clientService.postClient(clientDto).getClass(), UUID.class);
     }
 
     @Test
     void testGetAllClients(){
-        ClientDto clientDto = new ClientDto();
-        clientDto.setSurname("Alekseev");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
-        clientDto.setDocument("passport");
-        clientDto.setDocumentData("");
-        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
+        createClientDTO();
+        createClientDTOSecond();
         assertEquals(clientService.getAllClients().getClass(), ArrayList.class);
     }
 
@@ -134,18 +125,11 @@ public class ClientTest {
 
     @Test
     void testDeleteClient(){
-        UUID uuid = UUID.randomUUID();
-        ClientDto clientDto = new ClientDto();
-        clientDto.setSurname("Alekseev");
-        clientDto.setName("Alex");
-        clientDto.setPatronymic("Alekseevich");
-        clientDto.setDocument("passport");
-        clientDto.setDocumentData("52347");
-        clientDto.setBirthday(LocalDate.of(2023, 5, 3));
+        createClientDTO();
         UUID id =clientService.postClient(clientDto);
         clientService.deleteClient(id);
         Exception exception = assertThrows(ClientNotFoundException.class, () -> {
-            clientService.deleteClient(uuid);
+            clientService.deleteClient(id);
         });
         String expectedMessage = "CLIENT_NOT_FOUND";
         String actualMessage = exception.getMessage();
