@@ -63,10 +63,10 @@ public class BankAccountServiceImpl implements BankAccountService {
             throw new ClientNotFoundException();
         }
         if(bankAccountRepository.findBankAccountByAccountNumber(bankAccountNumber).isEmpty()){
-            logger.error("Банк не найден bankAccountNumber = {}", bankAccountNumber);
+            logger.error("Счет не найден bankAccountNumber = {}", bankAccountNumber);
             throw new BankAccountNotFoundException();
         }
-        logger.info("Аккаунт удален");
+        logger.info("Счет {} удален у клиента{}", bankAccountNumber, clientId);
         bankAccountRepository.deleteBankAccountByClientIdAndBankAccountId(clientId, bankAccountNumber);
 
     }

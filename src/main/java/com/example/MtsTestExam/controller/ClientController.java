@@ -32,28 +32,28 @@ public class ClientController {
     @PostMapping
     public ResponseEntity<ResponseData<ResponseClientId>> postClient(@RequestBody @Valid ClientDto clientDto){
         ResponseData<ResponseClientId> data = ResponseData.wrap(new ResponseClientId(clientService.postClient(clientDto)));
-        logger.info(data.toString());
+        logger.info("Клиент зарегистрирован {}", data.getData());
         return ResponseEntity.ok(data);
     }
 
     @GetMapping("/all-clients")
     public ResponseEntity<ResponseData<ResponseClients>> getAllClients(){
         ResponseData<ResponseClients> data = ResponseData.wrap(new ResponseClients(clientService.getAllClients()));
-        logger.info(data.toString());
+        logger.info("Возвращен список {}", data.getData());
         return ResponseEntity.ok(data);
     }
 
     @DeleteMapping
     public ResponseEntity<?> deleteClient(@RequestParam UUID clientId){
         clientService.deleteClient(clientId);
-        logger.info("Ok");
+        logger.info("Аккаунт clientId={} удален", clientId);
         return ResponseEntity.ok("");
     }
 
     @PostMapping("/bank-account")
     public ResponseEntity<ResponseData<ResponseBankAccountNumber>> postBankAccount(@RequestBody BankAccountDto bankAccountDto){
         ResponseData<ResponseBankAccountNumber> data = ResponseData.wrap(new ResponseBankAccountNumber(bankAccountService.postBankAccount(bankAccountDto)));
-        logger.info(data.toString());
+        logger.info("Счет зарегистрирован ={}", data.getData());
         return ResponseEntity.ok(data);
     }
 
@@ -61,13 +61,14 @@ public class ClientController {
     public ResponseEntity<ResponseData<ResponseUserListOfBankAccounts>> getClientListOfBankAccount(@RequestParam UUID clientId){
         ResponseData<ResponseUserListOfBankAccounts> data = ResponseData
                 .wrap(new ResponseUserListOfBankAccounts(bankAccountService.getClientListOfBankAccounts(clientId)));
-        logger.info(data.toString());
+        logger.info("Выдан список счетов {} clientId={} ", data.getData(), clientId);
         return ResponseEntity.ok(data);
     }
 
     @DeleteMapping("/bank-account")
     public ResponseEntity<?> deleteClient(@RequestParam UUID clientId, @RequestParam UUID bankAccountNumber ){
         bankAccountService.deleteBankAccount(clientId, bankAccountNumber);
+        logger.info("Счет bankAccountNumber={} удален", bankAccountNumber);
         return ResponseEntity.ok("");
     }
 

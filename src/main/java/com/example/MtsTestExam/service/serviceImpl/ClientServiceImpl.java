@@ -60,6 +60,7 @@ public class ClientServiceImpl implements ClientService {
     public void deleteClient(UUID clientId) {
         Optional<Client> client= clientRepository.findClientById(clientId);
         if(client.isPresent()){
+            logger.info("Клиент удален {}", client );
             clientRepository.deleteClient(clientId);
         }else{
             logger.error("Клиент не найден clientId = {}", clientId);
